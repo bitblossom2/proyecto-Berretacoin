@@ -49,7 +49,7 @@ Observaciones importantes:
 En una transacción los ids del comprador y del vendedor son distintos.
 No vamos a modelar ningún aspecto criptográfico (ni el Nonce, ni los hashes ni las claves).
 
-Observar [especificación semi-formal](ruta/al/archivo.pdf) para la especificación detallada.
+Observar [especificación semi-formal](especificacionTAD-Berretacoin/especificacion-Berretacoin.pdf) para la especificación detallada.
 
 
 ## Implementación en JAVA
@@ -91,7 +91,7 @@ Usaremos las siguientes variables para expresar las complejidades:
 7. **hackearTx**(inout berretacoin: $Berretacoin): O(log nb + log P)
    Extrae del último bloque de la cadena la transacción de mayor monto. No importa si después de la extracción queda una transacción dentro del bloque donde el comprador no tiene fondos suficientes.
 
-La ultima norma a cumplir fue superar los test provistos por los Berreteros. (ver archivo [BerretacoinTest.java](ruta/al/archivo.pdf)) Pero solo utilizando las estructuras de datos especificadas a continuación, implementadas por nosotros mismos:
+La ultima norma a cumplir fue superar los test provistos por los Berreteros. (ver archivo [BerretacoinTests.java](Code/src/test/java/aed/BerretacoinTests.java)) Pero solo utilizando las estructuras de datos especificadas a continuación, implementadas por nosotros mismos:
 * Arreglos
 * Arreglos redimensionables
 * Listas enlazadas
@@ -104,6 +104,10 @@ Con excepción de algunas clases predefinidas en la biblioteca estándar de Java
 Para abarcar el sistema de forma mas sencilla, intentamos encapsular y modularizar los problemas lo mas posible. Por ejemplo, para modelar la blockchain utilizamos el tipo de dato lista enlazada, el cual especificamos e implementamos como una clase de TAD previo a la utilizacion como objeto blockchain.
 
 ### Toma de decisiones
+
+Para evitar superar las complejidades limites decidimos establecer, dependiendo del objeto a modelar y sus funciones, distintas estructuras para cada objeto.
+
+La estructura general es la blockchain de Berretacoin, la cual decidimos modelar como una lista enlazada de **bloques**. 
 
 
 
