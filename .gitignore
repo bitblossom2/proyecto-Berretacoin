@@ -1,0 +1,16 @@
+# Archivos específicos de macOS
+.DS_Store
+
+# Archivos de compilación y dependencias comunes (Python, Node, etc.)
+# Si usas Python:
+__pycache__/
+*.pyc
+venv/
+
+# Si usas Node/JavaScript:
+node_modules/
+npm-debug.log
+
+# Carpeta de logs o temporales
+/log/
+*.tmp
