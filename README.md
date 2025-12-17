@@ -1,5 +1,21 @@
-# Proyecto-Berretacoin
+# Proyecto - Berretacoin - Implementación Optimizada de Blockchain
 Este proyecto fue realizado por Lila Fage, Santiago Garcia Nowak, Napoleon Saran Varela y Santos Basaldua.
+**Java | Estructuras de Datos | Complejidad Algorítmica**
+En este proyecto **desarrollamos el backend de una criptomoneda**, poniendo el foco rigurosamente en la eficiencia y en cumplir restricciones de complejidad temporal estrictas.
+
+A diferencia de una aplicación estándar, nuestro mayor desafío fue la **implementación manual de todas las estructuras de datos** (sin recurrir a las Java Collections). Esto nos permitió entender a fondo cómo optimizar el procesamiento de transacciones.
+
+### Nuestras Competencias Clave
+* **Lenguaje:** Utilizamos **Java**, aplicando principios sólidos de Diseño Orientado a Objetos.
+* **Estructuras de Datos Custom:** Implementamos desde cero **Árboles AVL, Colas de Prioridad (Heaps) y Listas Enlazadas** adaptadas a nuestras necesidades.
+* **Análisis de Algoritmos:** Optimizamos cada método para garantizar costos de **Complejidad** específicos (O(1), O(log n)).
+* **Testing:** Realizamos pruebas unitarias exhaustivas para validar la integridad de nuestra blockchain y cubrir casos borde.
+
+### Lo que Logramos
+* **Diseñamos** un sistema capaz de realizar consultas O(1) para transacciones de alto valor.
+* **Gestionamos** eficientemente la memoria y los punteros para evitar problemas de *aliasing* al manipular bloques.
+* **Resolvimos** problemas complejos de ordenamiento y búsqueda aplicando Heaps y Árboles Balanceados.
+
 Se realizo como entrega para la materia "Algoritmos y Estructuras de Datos II" en Julio del año 2025, para la Universidad de Buenos Aires.
 
 El proyecto se enfoca en realizar buenas practicas para modelado de objetos, tomando las precauciones necesarias, al igual que justificar formalmente la eleccion de estructuras de datos y complejidad de cada función. Se priorizó la correcta elección de:
