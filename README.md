@@ -1,6 +1,6 @@
 # Proyecto - Berretacoin - Implementación Optimizada de Blockchain
 
-# Lila Fage, Santiago Garcia Nowak, Napoleon Saran Varela y Santos Basaldua.
+# Lila Fage, Santiago Garcia Nowak, Napoleon Saran Varela y Santos Basaldúa.
 
 **Java | Estructuras de Datos | Complejidad Algorítmica**
 En este proyecto **desarrollamos el backend de una criptomoneda**, poniendo el foco rigurosamente en la eficiencia y en cumplir restricciones de complejidad temporal estrictas.
