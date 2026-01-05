@@ -1,59 +1,89 @@
 # 🪙 Berretacoin - Implementación Optimizada de Blockchain
 
-Este proyecto consiste en el desarrollo del backend de una criptomoneda, realizado para la materia **Algoritmos y Estructuras de Datos II (UBA)** en Julio de 2025. El foco principal es la **eficiencia algorítmica** y la gestión rigurosa de estructuras de datos.
+Este proyecto consiste en el desarrollo del backend de una criptomoneda, realizado para la materia **Algoritmos y Estructuras de Datos II (UBA)** en Julio de 2025.
 
 **Autores:** Lila Fage, Santiago Garcia Nowak, Napoleon Saran Varela y Santos Basaldúa.
 
-![Java](https://img.shields.io/badge/Language-Java-orange)
-![Complexity](https://img.shields.io/badge/Focus-Algorithmic%20Complexity-blue)
-![Data Structures](https://img.shields.io/badge/Structures-Custom%20Implementation-green)
-
 ---
 
-## 🚀 Desafío Técnico
-A diferencia de una aplicación estándar, nuestro mayor desafío fue la **implementación manual de todas las estructuras de datos** (sin recurrir a las *Java Collections*). Esto nos permitió optimizar el procesamiento de transacciones bajo restricciones de complejidad temporal estrictas.
+## 📌 Introducción y Propósito
+En este proyecto desarrollamos el backend de una criptomoneda, poniendo el foco rigurosamente en la eficiencia y en cumplir restricciones de complejidad temporal estrictas.
 
-### Competencias Clave
+A diferencia de una aplicación estándar, nuestro mayor desafío fue la **implementación manual de todas las estructuras de datos** (sin recurrir a las Java Collections). Esto nos permitió entender a fondo cómo optimizar el procesamiento de transacciones.
+
+### Nuestras Competencias Clave
+* **Lenguaje:** Java con principios sólidos de Diseño Orientado a Objetos.
 * **Estructuras de Datos Custom:** Implementamos desde cero **Árboles AVL, Colas de Prioridad (Heaps) y Listas Enlazadas**.
-* **Análisis de Algoritmos:** Cada método fue diseñado para garantizar costos de complejidad específicos ($O(1)$, $O(\log n)$).
-* **Gestión de Memoria:** Control exhaustivo de punteros para evitar problemas de *aliasing* al manipular bloques y usuarios.
+* **Análisis de Algoritmos:** Optimizamos cada método para garantizar costos de Complejidad específicos ($O(1)$, $O(\log n)$).
+* **Testing:** Pruebas unitarias exhaustivas para validar la integridad y cubrir casos borde.
 
 ---
 
-## 📝 Especificación y Funcionamiento
+## 📋 Información Preliminar
 
-Berretacoin modela una red donde los usuarios (IDs enteros) realizan transacciones agrupadas en bloques. Aunque la estructura emula una blockchain, esta aplicación **no utiliza algoritmos criptográficos**.
+Se propuso la creación de la única criptomoneda completamente libre de controles criptográficos: la **$Berretacoin**.
 
-### Conceptos Principales:
-* **Transacción:** Tupla de enteros `(id, comprador, vendedor, monto)`.
-* **Bloque:** Contiene hasta 50 transacciones ordenadas.
-* **Transacción de creación:** Emite nuevas unidades de $Berretacoin (hasta 3000 unidades).
+### Definiciones del Dominio:
+* **Usuarios:** Identificados con un número entero positivo.
+* **Transacción:** Tupla de enteros `(id transaccion, id comprador, id vendedor, monto)`.
+* **Bloque:** Contiene a lo sumo 50 transacciones ordenadas por ID. Los bloques se encadenan consecutivamente.
+* **Transacción de Creación:** Emite una nueva unidad de $Berretacoin (comprador ID 0). Límite de emisión: 3000 unidades.
 
-### Operaciones e Implementación:
-| Operación | Complejidad | Descripción |
-| :--- | :--- | :--- |
-| `nuevoBerretacoin` | $O(P)$ | Inicializa el sistema con $P$ usuarios. |
-| `agregarBloque` | $O(nb \cdot \log P)$ | Agrega un bloque con $nb$ transacciones. |
-| `txMayorValorUltimoBloque` | $O(1)$ | Retorna la transacción más valiosa del último bloque. |
-| `maximoTenedor` | $O(1)$ | Retorna el usuario con mayor saldo (vía Heap). |
-| `hackearTx` | $O(\log nb + \log P)$ | Extrae la transacción de mayor monto del último bloque. |
+> **Aclaración:** A partir del bloque 3000 no hay más “transacciones de creación”. Esta aplicación no utiliza algoritmos de criptografía reales.
 
 ---
 
-## 🛠️ Toma de Decisiones y Arquitectura
+## ⚙️ Especificación y Tipos de Datos
 
-Para cumplir con las complejidades exigidas, modularizamos el sistema bajo el principio de *Divide and Conquer*:
+Logramos especificar e implementar el TAD $Berretacoin con las siguientes operaciones principales:
 
-1.  **Blockchain:** Implementada como una **Lista Enlazada** de bloques para permitir un encadenamiento eficiente.
-2.  **Gestión de Usuarios (Clase `Users`):** * Utilizamos un **Heap (Cola de Prioridad)** para almacenar objetos `User`. Esto permite que la consulta del `maximoTenedor` sea $O(1)$.
-    * Implementamos un **Array de Handles** (referencias directas al Heap). Cada índice del array corresponde al ID de un usuario, permitiendo localizar y actualizar saldos en el Heap de forma práctica y eficiente.
-3.  **Encapsulamiento:** Definimos subclases para modelar la relación entre el balance y el ID, asegurando que los atributos privados solo se modifiquen mediante métodos validados.
+* **agregarBloque:** Dada una secuencia de transacciones, agrega un nuevo bloque a la cadena.
+* **maximosTenedores:** Devuelve los usuarios con mayor cantidad de $Berretacoin.
+* **montoMedio:** Promedio de transacciones (excluyendo creación).
+* **cotizacionAPesos:** Conversión de montos basada en una lista de cotizaciones por bloque.
+
+📄 Ver [especificación semi-formal detallada](especificacionTAD-Berretacoin/especificacion-Berretacoin.pdf).
+
+---
+
+## 💻 Implementación en JAVA
+
+### El Contexto de los "Berreteros"
+Durante el desarrollo, se reveló que la moneda fue diseñada con fines maliciosos bajo la falsa promesa de una “revolución financiera”. Entre los requisitos destaca la función `hackearTx`, un método diseñado para extraer el valor máximo (MEV) y permitir esquemas *pump-and-dump*.
+
+### Requerimientos de Complejidad
+Utilizamos las siguientes variables:
+* **P:** cantidad total de usuarios.
+* **nb:** cantidad de transacciones en el bloque.
+
+| Operación | Complejidad Requerida |
+| :--- | :--- |
+| `nuevoBerretacoin(n)` | $O(P)$ |
+| `agregarBloque(transacciones)` | $O(nb * \log P)$ |
+| `txMayorValorUltimoBloque()` | $O(1)$ |
+| `txUltimoBloque()` | $O(nb)$ |
+| `maximoTenedor()` | $O(1)$ |
+| `montoMedioUltimoBloque()` | $O(1)$ |
+| `hackearTx()` | $O(\log nb + \log P)$ |
+
+El ultimo requerimiento se baso en el cumplimiento de los test del sistema. (ver archivo [BerretacoinTests.java](Code/src/test/java/aed/BerretacoinTests.java))
 
 ---
 
-## 📂 Documentación Adicional
-* 📄 [Especificación Semi-formal (PDF)](especificacionTAD-Berretacoin/especificacion-Berretacoin.pdf)
-* 🧪 [Suite de Tests Unitarios](Code/src/test/java/aed/BerretacoinTests.java)
+## 🛠️ Toma de Decisiones Técnicas
+
+Para no superar los límites de complejidad, decidimos modularizar el sistema utilizando:
+
+1.  **Blockchain:** Una **Lista Enlazada** de bloques.
+2.  **Gestión de Usuarios (Clase `Users`):**
+    * Cada usuario (`User`) mantiene su ID y monto actualizado.
+    * Utilizamos un **Heap (Max-Heap)** para almacenar los usuarios, permitiendo obtener al máximo tenedor en $O(1)$.
+    * **Array de Handles:** Un arreglo donde cada índice corresponde al ID del usuario y contiene una referencia directa a su posición en el Heap. Esto permite actualizar saldos y re-ordenar el Heap en $O(\log P)$ tras cada transacción.
+3.  **Estructuras propias:** Solo se utilizaron estructuras implementadas por nosotros:
+    * Arreglos redimensionables, Listas enlazadas, AVL y Heaps.
 
 ---
-*Este proyecto fue desarrollado con fines académicos para la Universidad de Buenos Aires.*
+
+## 📂 Archivos del Proyecto
+* **Código Fuente:** Implementación de estructuras y lógica de negocio.
+* **Tests:** [BerretacoinTests.java](Code/src/test/java/aed/BerretacoinTests.java) (Validación de lógica y performance).
