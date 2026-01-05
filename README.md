@@ -24,7 +24,7 @@ A diferencia de una aplicación estándar, nuestro mayor desafío fue la **imple
 Se propuso la creación de la única criptomoneda completamente libre de controles criptográficos: la **$Berretacoin**.
 
 ### Definiciones del Dominio:
-* **Usuarios:** Identificados con un número entero positivo.
+* **Usuarios:** Identificados con un número entero positivo. Hay dos tipos en cada transaccion: Un comprador (quien realiza una compra de un bien o servicio y paga con Berretacoin) y un Vendedor (quien recibe el pago y entrega el bien o servicio).
 * **Transacción:** Tupla de enteros `(id transaccion, id comprador, id vendedor, monto)`.
 * **Bloque:** Contiene a lo sumo 50 transacciones ordenadas por ID. Los bloques se encadenan consecutivamente.
 * **Transacción de Creación:** Emite una nueva unidad de $Berretacoin (comprador ID 0). Límite de emisión: 3000 unidades.
@@ -79,8 +79,13 @@ Para no superar los límites de complejidad, decidimos modularizar el sistema ut
     * Cada usuario (`User`) mantiene su ID y monto actualizado.
     * Utilizamos un **Heap (Max-Heap)** para almacenar los usuarios, permitiendo obtener al máximo tenedor en $O(1)$.
     * **Array de Handles:** Un arreglo donde cada índice corresponde al ID del usuario y contiene una referencia directa a su posición en el Heap. Esto permite actualizar saldos y re-ordenar el Heap en $O(\log P)$ tras cada transacción.
-3.  **Estructuras propias:** Solo se utilizaron estructuras implementadas por nosotros:
+3. **Transacciones**
+   * Cada Transacción tiene 4 atributos: su id propio, para poder identificarla; El id del comprador y el id del vendedor de la transacción, junto con el monto de esta como ultimo atributo.
+   * Decidimos que dos transacciones sean comparables, siguiendo el criterio de comparacion mediante los montos de estas (una transferencia X es mayor que una transferencia Y si y solo si el atributo monto de X es mayor que el de Y).
+4. **Bloque**
+5.  **Estructuras propias:** Solo se utilizaron estructuras implementadas por nosotros:
     * Arreglos redimensionables, Listas enlazadas, AVL y Heaps.
+
 
 ---
 
