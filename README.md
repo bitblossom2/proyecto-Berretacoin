@@ -34,6 +34,7 @@ Se propuso la creación de la única criptomoneda completamente libre de control
 ---
 
 ## ⚙️ Especificación y Tipos de Datos
+Para la creación del sistema, primero decidimos centrarnos en la espicificación y elección de datos a utilizar. Creamos y especificamos un TAD que modela su funcionamiento, nuestra cripto tiene **usuarios**, **transacciones** (que involucran exactamente a dos usuarios) y **bloques** (que contienen a lo sumo 50 transacciones, cuyos identificadores están ordenados dentro del bloque). A su vez, cada bloque tiene un identificador que es un entero no negativo. Los bloques se encadenan de forma consecutiva de acuerdo al identificador.
 
 Logramos especificar e implementar el TAD $Berretacoin con las siguientes operaciones principales:
 
@@ -48,8 +49,11 @@ Logramos especificar e implementar el TAD $Berretacoin con las siguientes operac
 
 ## 💻 Implementación en JAVA
 
-### El Contexto de los "Berreteros"
-Durante el desarrollo, se reveló que la moneda fue diseñada con fines maliciosos bajo la falsa promesa de una “revolución financiera”. Entre los requisitos destaca la función `hackearTx`, un método diseñado para extraer el valor máximo (MEV) y permitir esquemas *pump-and-dump*.
+Cuando especificamos el tipo de datos abstracto $Berretacoin, sin saberlo, estabamos siguiendo ordenes para diseñar una criptomoneda con fines maliciosos, bajo la falsa promesa de estar creando una “revolución financiera descentralizada”. Ahora, revelaremos parte de sus intenciones ocultas mientras implementamos este TAD utilizando estructuras de datos apropiadas.
+
+Entre los requisitos específicos de los Berreteros -quienes ingeniaron la moneda-, destaca la función hackearTx, un método malicioso diseñado para extraer el valor máximo (MEV) de las transacciones, permitiendoles manipular la cadena de bloques y realizar estafas sistemáticas a los desprevenidos tenedores de la moneda. Este método es parte integral de su plan para realizar esquemas pump-and-dump donde artificialmente elevan el valor de la moneda para luego extraer las transacciones más valiosas, dejando a los inversores con pérdidas significativas.
+
+Para cumplir con las consignas establecidas, debimos generar un codigo que cumpla las siguientes normativas:
 
 ### Requerimientos de Complejidad
 Utilizamos las siguientes variables:
@@ -68,6 +72,14 @@ Utilizamos las siguientes variables:
 
 El ultimo requerimiento se baso en el cumplimiento de los test del sistema. (ver archivo [BerretacoinTests.java](Code/src/test/java/aed/BerretacoinTests.java))
 
+
+### Aclaraciones
+
+- Los usuarios se identifican con números enteros positivos consecutivos.
+- A diferencia de la especificación anterior, esta vez la cantidad de transacciones por bloque no está acotada.
+- Al hackear una transacción, se debe restaurar el monto de la transacción al comprador y al vendedor.
+- Las complejidades asociadas a cada operación deben coincidir, o ser menores.
+- Para abarcar el sistema de forma mas sencilla, intentamos encapsular y modularizar los problemas lo mas posible. Por ejemplo, para modelar la blockchain utilizamos el tipo de dato lista enlazada, el cual especificamos e implementamos como una clase de TAD previo a la utilizacion como objeto blockchain.
 ---
 
 ## 🛠️ Toma de Decisiones Técnicas
