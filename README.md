@@ -14,7 +14,7 @@ A diferencia de una aplicación estándar, nuestro mayor desafío fue la **imple
 ### Nuestras Competencias Clave
 * **Lenguaje:** Java con principios sólidos de Diseño Orientado a Objetos.
 * **Estructuras de Datos Custom:** Implementamos desde cero **Árboles AVL, Colas de Prioridad (Heaps) y Listas Enlazadas**.
-* **Análisis de Algoritmos:** Optimizamos cada método para garantizar costos de Complejidad específicos ($O(1)$, $O(log n)$).
+* **Análisis de Algoritmos:** Optimizamos cada método para garantizar costos de Complejidad específicos ($O(1)$, $O(log (n))$).
 * **Testing:** Pruebas unitarias exhaustivas para validar la integridad y cubrir casos borde.
 
 ---
@@ -43,7 +43,7 @@ Logramos especificar e implementar el TAD $Berretacoin con las siguientes operac
 * **montoMedio:** Promedio de transacciones (excluyendo creación).
 * **cotizacionAPesos:** Conversión de montos basada en una lista de cotizaciones por bloque.
 
-📄 Ver [especificación semi-formal detallada]('especificacion TAD Berretacoin'/especificacion-Berretacoin.pdf).
+📄 Ver [especificación semi-formal detallada](./especificacion%20TAD%20Berretacoin/especificacion-Berretacoin.pdf).
 
 ---
 
